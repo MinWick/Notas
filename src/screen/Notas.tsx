@@ -7,19 +7,22 @@ const Notas = () => {
     const [text, setText] = useState<string>('');
     const [FNota, setFNota] = useState<string>('')
     const [SNota, setSNota] = useState<string>('')
-    const [resultado, setResultado] = useState<[]>([])
+    const [resultado, setResultado] = useState<number[]>([])
 
     const hasndleShow = () => {
         const newuser: string[] = [text]
         const users = [...palabra, ...newuser]
         setPalabra(users)
 
-        
+
         let result = parseFloat(FNota) + parseFloat(SNota)
-        let resultFinal = ( result / 2 )
+        let resultFinal = (result / 2)
         const NF = [...resultado, resultFinal]
         setResultado(NF)
     }
+    useEffect(() => {
+     hasndleShow
+    }, [resultado, setResultado])
     return (
         <ScrollView contentContainerStyle={styles.contentContainer}>
             <TextInput style={styles.Tinputs}
@@ -36,9 +39,11 @@ const Notas = () => {
                 defaultValue={"IIP"}
                 onChangeText={setSNota}
             />
-            <Text>
-                {resultado}
-            </Text>
+            <View>
+                <Text>
+                    {resultado}
+                </Text>
+            </View>
 
             <TouchableOpacity
                 style={styles.button}
@@ -50,9 +55,9 @@ const Notas = () => {
             </TouchableOpacity>
             {
                 palabra.map((item, index, datos) =>
-                    <View style={styles.constainer}>    
-                        <Text key={index}>
-                        {index} {item}  
+                    <View style={styles.constainer}>
+                        <Text>
+                            {index} {item}
                         </Text>
                         <Text > Nota final:
                             {resultado[index]}
@@ -61,7 +66,7 @@ const Notas = () => {
 
                 )
             }
-       </ScrollView>
+        </ScrollView>
     )
 }
 
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingVertical: 20
-      } ,
-      
+    },
+
 
 })
