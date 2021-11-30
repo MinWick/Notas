@@ -1,39 +1,45 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-
+import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
+import Gnotas from '../components/Gnotas'
 
 const Notas = () => {
 
-    const [palabra, setPalabra] = React.useState([''])
-    const [text, setText] = React.useState<string>('');
-    const [FNota, setFNota] = React.useState<number>(0)
-    const [SNota, setSNota] = React.useState<number>(0)
-    const [resultado, setResultado] = React.useState<string[]>([])
-
-
+    const [palabra, setPalabra] = useState([''])
+    const [text, setText] = useState<string>('');
+    const [FNota, setFNota] = useState<string>('')
+    const [SNota, setSNota] = useState<string>('')
+    const [resultado, setResultado] = useState<number[]>([])
 
     const hasndleShow = () => {
         const newuser: string[] = [text]
         const users = [...palabra, ...newuser]
         setPalabra(users)
-        
+        let result = parseFloat(FNota) + parseFloat(SNota)
+        let resultFinal = ( result / 2 )
+        const NF = [...resultado, resultFinal]
+        setResultado(NF)
+
     }
     return (
-        <View>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
             <TextInput style={styles.Tinputs}
                 placeholder='Nombre del estudiante'
                 onChangeText={text => setText(text)}
             />
-            <TextInput style={styles.Tinputs}
-                placeholder='IP'
-                onChangeText={FNota => setFNota}
+            <Gnotas
+                title={"IP"}
+                defaultValue={"IP"}
+                onChangeText={setFNota}
             />
-            <TextInput style={styles.Tinputs}
-                placeholder='IIP'
-                onChangeText={SNota => setSNota}
+            <Gnotas
+                title={"IIP"}
+                defaultValue={"IIP"}
+                onChangeText={setSNota}
             />
-            <TextInput style={styles.Tinputs}
-                placeholder='NF'
+            <Gnotas
+                title={"NF"}
+                defaultValue={"NF"}
+                onChangeText={setSNota}
             />
 
             <TouchableOpacity
@@ -41,7 +47,7 @@ const Notas = () => {
                 onPress={hasndleShow}
             >
                 <Text>
-                    here
+                    Agregar
                 </Text>
             </TouchableOpacity>
 
@@ -51,11 +57,13 @@ const Notas = () => {
                         <Text key={index}>
                             {item}
                         </Text>
+                        <View {...index}>
+                        </View>
                     </View>
 
                 )
             }
-        </View>
+       </ScrollView>
     )
 }
 
@@ -81,11 +89,13 @@ const styles = StyleSheet.create({
         marginTop: 2
     },
     button: {
-        paddingTop: 25,
-        backgroundColor: "#05786A",
-        paddingLeft: 100,
-        paddingRight: 100,
-        alignItems: 'center'
-    }
+        paddingTop: 10,
+        backgroundColor: "#C4C4C4",
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
+    contentContainer: {
+        paddingVertical: 20
+      }  
 
 })

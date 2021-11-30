@@ -5,9 +5,9 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 interface Props{
     title:string;
     defaultValue:string;
-    onChangeNum:(text: string) => void;
+    onChangeText:(text: string) => void;
 }
-const Gnotas = ({title, defaultValue, onChangeNum}:Props) => {
+const Gnotas = ({title, defaultValue, onChangeText}:Props) => {
 
     return (
         <View>
@@ -16,7 +16,7 @@ const Gnotas = ({title, defaultValue, onChangeNum}:Props) => {
             <TextInput
                 style={styles.Tinputs}
                 placeholder={defaultValue}
-                onChangeText={text => onChangeNum(text)}
+                onChangeText={text => onChangeText(text)}
             />
         </View>
         </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#05786A",
         paddingLeft: 100,
         paddingRight: 100,
-        alignItems: 'center'
+        alignItems:'center'
     }
 
 })
