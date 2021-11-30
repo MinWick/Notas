@@ -4,47 +4,57 @@ import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'rea
 
 const Notas = () => {
 
-const [palabra, setPalabra] = React.useState([''])
-const [text, setText] = React.useState<string>('');
+    const [palabra, setPalabra] = React.useState([''])
+    const [text, setText] = React.useState<string>('');
+    const [FNota, setFNota] = React.useState<number>(0)
+    const [SNota, setSNota] = React.useState<number>(0)
+    const [resultado, setResultado] = React.useState<string[]>([])
 
-const hasndleShow = () => {
-    const newuser: string[] = [text]
-    const users = [...palabra, ...newuser]
-    setPalabra(users)
-} 
+
+
+    const hasndleShow = () => {
+        const newuser: string[] = [text]
+        const users = [...palabra, ...newuser]
+        setPalabra(users)
+        
+    }
     return (
         <View>
-        <TextInput style={styles.Tinputs}
-            placeholder='Estriba aquui'
-            onChangeText={ text => setText(text)}
-        />
-                <TextInput style={styles.Tinputs}
-            placeholder='Estriba aquui'
-            onChangeText={ FNota => setFNota(FNota)}
-        />
-                <TextInput style={styles.Tinputs}
-            placeholder='Estriba aquui'
-            onChangeText={ SNota => setSNota(SNota)}
-        />
-        <TouchableOpacity
-        style={styles.button}
-            onPress={hasndleShow}
-        >
-            <Text>
-                here
-            </Text>
-        </TouchableOpacity>
+            <TextInput style={styles.Tinputs}
+                placeholder='Nombre del estudiante'
+                onChangeText={text => setText(text)}
+            />
+            <TextInput style={styles.Tinputs}
+                placeholder='IP'
+                onChangeText={FNota => setFNota}
+            />
+            <TextInput style={styles.Tinputs}
+                placeholder='IIP'
+                onChangeText={SNota => setSNota}
+            />
+            <TextInput style={styles.Tinputs}
+                placeholder='NF'
+            />
 
-        {
-                    palabra.map((item, index) => 
+            <TouchableOpacity
+                style={styles.button}
+                onPress={hasndleShow}
+            >
+                <Text>
+                    here
+                </Text>
+            </TouchableOpacity>
+
+            {
+                palabra.map((item, index) =>
                     <View style={styles.constainer}>
                         <Text key={index}>
-                        {item}
+                            {item}
                         </Text>
                     </View>
 
-                    )
-                }
+                )
+            }
         </View>
     )
 }
@@ -54,9 +64,11 @@ const styles = StyleSheet.create({
     Tinputs: {
         backgroundColor: '#FFFFFF',
         borderRadius: 8,
-        padding: 15,
+        padding: 5,
         fontSize: 22,
         color: '#034C50',
+        alignItems: 'flex-start',
+
     },
     constainer: {
         width: '95%',
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#05786A",
         paddingLeft: 100,
         paddingRight: 100,
-        alignItems:'center'
+        alignItems: 'center'
     }
 
 })
