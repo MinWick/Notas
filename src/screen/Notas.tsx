@@ -1,47 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
-import Gnotas from '../components/Gnotas'
 
 const Notas = () => {
+
     const [palabra, setPalabra] = useState([''])
     const [text, setText] = useState<string>('');
     const [FNota, setFNota] = useState<string>('')
     const [SNota, setSNota] = useState<string>('')
-    const [resultado, setResultado] = useState<number[]>([])
+    const [total, setTotal] = useState<string[]>([])
 
     const hasndleShow = () => {
-        const newuser: string[] = [text]
-        const users = [...palabra, ...newuser]
-        setPalabra(users)
+        const texts: string[] = [text]
+        const allText: string[] = [...palabra, ...texts]
+        setPalabra(allText)
 
-
-        let result = parseFloat(FNota) + parseFloat(SNota)
-        let resultFinal = (result / 2)
-        const NF = [...resultado, resultFinal]
-        setResultado(NF)
+        const parcials = (parseFloat(FNota) + parseFloat(SNota))/2
+        const Total: string[] = [parcials.toString()]
+        const TTotal: string[] = [...total, ...Total]
+        setTotal(TTotal)
     }
-    useEffect(() => {
-     hasndleShow
-    }, [resultado, setResultado])
     return (
         <ScrollView contentContainerStyle={styles.contentContainer}>
             <TextInput style={styles.Tinputs}
                 placeholder='Nombre del estudiante'
                 onChangeText={text => setText(text)}
             />
-            <Gnotas
-                title={"IP"}
-                defaultValue={"IP"}
-                onChangeText={setFNota}
+            <TextInput
+                placeholder='IP'
+                onChangeText={FNota => setFNota(FNota)}
             />
-            <Gnotas
-                title={"IIP"}
-                defaultValue={"IIP"}
-                onChangeText={setSNota}
+            <TextInput
+                 placeholder='IIP'
+                 onChangeText={SNota => setSNota(SNota)}
             />
             <View>
-                <Text>
-                    {resultado}
+                <Text> 
+                    { total }
                 </Text>
             </View>
 
@@ -53,19 +47,29 @@ const Notas = () => {
                     Agregar
                 </Text>
             </TouchableOpacity>
-            {
-                palabra.map((item, index, datos) =>
+            {/* {
+                palabra.map((lista, index) =>
                     <View style={styles.constainer}>
-                        <Text>
-                            {index} {item}
+                        <Text key={index}>
+                            {lista}
                         </Text>
                         <Text > Nota final:
-                            {resultado[index]}
+                            {total[index]}
                         </Text>
                     </View>
 
                 )
+            } */
+                palabra.map((estudiante, index) => (
+                    <View style={styles.constainer}>
+                        <Text key={index}>{index}{estudiante} </Text>
+                        <Text>
+                            Jarellys: {total[index]}
+                        </Text>
+                    </View>
+                ))
             }
+
         </ScrollView>
     )
 }
