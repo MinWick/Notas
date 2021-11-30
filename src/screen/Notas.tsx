@@ -6,8 +6,6 @@ const Notas = () => {
 
 const [palabra, setPalabra] = React.useState([''])
 const [text, setText] = React.useState<string>('');
-const [FNota, setFNota] = React.useState(0)
-const [SNota, setSNota] = React.useState(0)
 
 const hasndleShow = () => {
     const newuser: string[] = [text]
@@ -19,6 +17,14 @@ const hasndleShow = () => {
         <TextInput style={styles.Tinputs}
             placeholder='Estriba aquui'
             onChangeText={ text => setText(text)}
+        />
+                <TextInput style={styles.Tinputs}
+            placeholder='Estriba aquui'
+            onChangeText={ FNota => setFNota(FNota)}
+        />
+                <TextInput style={styles.Tinputs}
+            placeholder='Estriba aquui'
+            onChangeText={ SNota => setSNota(SNota)}
         />
         <TouchableOpacity
         style={styles.button}
