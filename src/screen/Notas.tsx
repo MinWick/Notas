@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import Gnotas from '../components/Gnotas'
 
@@ -18,8 +18,11 @@ const Notas = () => {
         let resultFinal = ( result / 2 )
         const NF = [...resultado, resultFinal]
         setResultado(NF)
-
+        console.log(resultado);
     }
+    useEffect(() => {
+       hasndleShow() 
+    }, [])
     return (
         <ScrollView contentContainerStyle={styles.contentContainer}>
             <TextInput style={styles.Tinputs}
@@ -57,8 +60,9 @@ const Notas = () => {
                         <Text key={index}>
                             {item}
                         </Text>
-                        <View {...index}>
-                        </View>
+                        <Text>
+                            {resultado}
+                        </Text>
                     </View>
 
                 )
@@ -79,7 +83,6 @@ const styles = StyleSheet.create({
 
     },
     constainer: {
-        width: '95%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 2,
