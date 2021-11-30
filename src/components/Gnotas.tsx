@@ -12,7 +12,7 @@ const Gnotas = ({title, defaultValue, onChangeText}:Props) => {
     return (
         <View>
              <View>
-             <Text>{title}</Text>
+             <Text >{title}</Text>
             <TextInput
                 style={styles.Tinputs}
                 placeholder={defaultValue}

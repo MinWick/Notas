@@ -3,26 +3,23 @@ import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView
 import Gnotas from '../components/Gnotas'
 
 const Notas = () => {
-
     const [palabra, setPalabra] = useState([''])
     const [text, setText] = useState<string>('');
     const [FNota, setFNota] = useState<string>('')
     const [SNota, setSNota] = useState<string>('')
-    const [resultado, setResultado] = useState<number[]>([])
+    const [resultado, setResultado] = useState<[]>([])
 
     const hasndleShow = () => {
         const newuser: string[] = [text]
         const users = [...palabra, ...newuser]
         setPalabra(users)
+
+        
         let result = parseFloat(FNota) + parseFloat(SNota)
         let resultFinal = ( result / 2 )
         const NF = [...resultado, resultFinal]
         setResultado(NF)
-        console.log(resultado);
     }
-    useEffect(() => {
-       hasndleShow() 
-    }, [])
     return (
         <ScrollView contentContainerStyle={styles.contentContainer}>
             <TextInput style={styles.Tinputs}
@@ -39,11 +36,9 @@ const Notas = () => {
                 defaultValue={"IIP"}
                 onChangeText={setSNota}
             />
-            <Gnotas
-                title={"NF"}
-                defaultValue={"NF"}
-                onChangeText={setSNota}
-            />
+            <Text>
+                {resultado}
+            </Text>
 
             <TouchableOpacity
                 style={styles.button}
@@ -53,15 +48,14 @@ const Notas = () => {
                     Agregar
                 </Text>
             </TouchableOpacity>
-
             {
-                palabra.map((item, index) =>
-                    <View style={styles.constainer}>
+                palabra.map((item, index, datos) =>
+                    <View style={styles.constainer}>    
                         <Text key={index}>
-                            {item}
+                        {index} {item}  
                         </Text>
-                        <Text>
-                            {resultado}
+                        <Text > Nota final:
+                            {resultado[index]}
                         </Text>
                     </View>
 
@@ -99,6 +93,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingVertical: 20
-      }  
+      } ,
+      
 
 })
